@@ -748,7 +748,11 @@ void _IQShowLog(NSString *logString);
             }
             
             //Updating contentInset
-            {
+            
+            // skip this part to fix the bug
+            // when a textfield is within a scrollview that is not high enough to show both keyboard and textfield
+            // this only occurs when the inputAccessoryView is present
+            if (NO) {
                 CGRect lastScrollViewRect = [[_lastScrollView superview] convertRect:_lastScrollView.frame toView:keyWindow];
 
                 CGFloat bottom = kbSize.height-keyboardDistanceFromTextField-(CGRectGetHeight(keyWindow.frame)-CGRectGetMaxY(lastScrollViewRect));
